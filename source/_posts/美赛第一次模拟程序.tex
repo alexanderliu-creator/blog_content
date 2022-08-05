@@ -1,0 +1,188 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\newenvironment{Shaded}{}{}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{#1}}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{#1}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{#1}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{#1}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{#1}}}}
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+
+\author{}
+\date{}
+
+\begin{document}
+
+The usage of logistic model together with Runge-Kutta:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\#\%\%}
+
+\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
+\ImportTok{import}\NormalTok{ matplotlib.pyplot }\ImportTok{as}\NormalTok{ plt}
+\ImportTok{import}\NormalTok{ math}
+
+\CommentTok{\#\%\%}
+
+\KeywordTok{def}\NormalTok{ ode\_RK2(f,t0,tf,y0}\OperatorTok{=}\DecValTok{0}\NormalTok{,n}\OperatorTok{=}\DecValTok{100}\NormalTok{):}
+\NormalTok{    t }\OperatorTok{=}\NormalTok{ np.linspace(t0,tf,n)}
+\NormalTok{    y }\OperatorTok{=} \BuiltInTok{list}\NormalTok{([y0])}
+    \ControlFlowTok{for}\NormalTok{ i }\KeywordTok{in} \BuiltInTok{range}\NormalTok{(n}\OperatorTok{{-}}\DecValTok{1}\NormalTok{):}
+\NormalTok{        h }\OperatorTok{=}\NormalTok{ t[i}\OperatorTok{+}\DecValTok{1}\NormalTok{] }\OperatorTok{{-}}\NormalTok{ t[i]}
+\NormalTok{        k1 }\OperatorTok{=}\NormalTok{ h}\OperatorTok{*}\NormalTok{f(t[i],y[}\OperatorTok{{-}}\DecValTok{1}\NormalTok{])}
+\NormalTok{        k2 }\OperatorTok{=}\NormalTok{ h}\OperatorTok{*}\NormalTok{f(t[i]}\OperatorTok{+}\NormalTok{h}\OperatorTok{/}\FloatTok{2.0}\NormalTok{,y[}\OperatorTok{{-}}\DecValTok{1}\NormalTok{]}\OperatorTok{+}\NormalTok{k1}\OperatorTok{/}\FloatTok{2.0}\NormalTok{)}
+\NormalTok{        y.append(y[}\OperatorTok{{-}}\DecValTok{1}\NormalTok{]}\OperatorTok{+}\NormalTok{k2)}
+
+\NormalTok{    y }\OperatorTok{=}\NormalTok{ np.array(y)}
+
+    \ControlFlowTok{return}\NormalTok{ y}
+
+\CommentTok{\#\%\%}
+
+\CommentTok{\# Fourth order Runge{-}Kutta}
+\KeywordTok{def}\NormalTok{ ode\_RK4(f,t0,tf,y0}\OperatorTok{=}\DecValTok{0}\NormalTok{,n}\OperatorTok{=}\DecValTok{100}\NormalTok{):}
+    \CommentTok{""" y is the initial value for y}
+\CommentTok{        x is the initial value for x}
+\CommentTok{        dx is the time step in x}
+\CommentTok{        f is derivative of function y(t)}
+\CommentTok{    """}
+\NormalTok{    t }\OperatorTok{=}\NormalTok{ np.linspace(t0,tf,n)}
+\NormalTok{    y }\OperatorTok{=} \BuiltInTok{list}\NormalTok{([y0])}
+    \ControlFlowTok{for}\NormalTok{ i }\KeywordTok{in} \BuiltInTok{range}\NormalTok{(n}\OperatorTok{{-}}\DecValTok{1}\NormalTok{):}
+\NormalTok{        h }\OperatorTok{=}\NormalTok{ t[i}\OperatorTok{+}\DecValTok{1}\NormalTok{] }\OperatorTok{{-}}\NormalTok{ t[i]}
+\NormalTok{        k1 }\OperatorTok{=}\NormalTok{ h}\OperatorTok{*}\NormalTok{f(t[i],y[}\OperatorTok{{-}}\DecValTok{1}\NormalTok{])}
+\NormalTok{        k2 }\OperatorTok{=}\NormalTok{ h}\OperatorTok{*}\NormalTok{f(t[i]}\OperatorTok{+}\NormalTok{h}\OperatorTok{/}\FloatTok{2.0}\NormalTok{,y[}\OperatorTok{{-}}\DecValTok{1}\NormalTok{]}\OperatorTok{+}\NormalTok{k1}\OperatorTok{/}\FloatTok{2.0}\NormalTok{)}
+\NormalTok{        k3 }\OperatorTok{=}\NormalTok{ h}\OperatorTok{*}\NormalTok{f(t[i]}\OperatorTok{+}\NormalTok{h}\OperatorTok{/}\FloatTok{2.0}\NormalTok{,y[}\OperatorTok{{-}}\DecValTok{1}\NormalTok{]}\OperatorTok{+}\NormalTok{k2}\OperatorTok{/}\FloatTok{2.0}\NormalTok{)}
+\NormalTok{        k4 }\OperatorTok{=}\NormalTok{ h}\OperatorTok{*}\NormalTok{f(t[i]}\OperatorTok{+}\NormalTok{h,y[}\OperatorTok{{-}}\DecValTok{1}\NormalTok{]}\OperatorTok{+}\NormalTok{k3)}
+\NormalTok{        y.append(y[}\OperatorTok{{-}}\DecValTok{1}\NormalTok{]}\OperatorTok{+}\NormalTok{(k1}\OperatorTok{+}\DecValTok{2}\OperatorTok{*}\NormalTok{k2}\OperatorTok{+}\DecValTok{2}\OperatorTok{*}\NormalTok{k3}\OperatorTok{+}\NormalTok{k4)}\OperatorTok{/}\FloatTok{6.0}\NormalTok{)}
+
+\NormalTok{    y }\OperatorTok{=}\NormalTok{ np.array(y)}
+
+    \ControlFlowTok{return}\NormalTok{ y}
+
+\CommentTok{\#\%\%}
+
+
+\CommentTok{\# Logistic Model}
+\KeywordTok{def}\NormalTok{ f(t,y):}
+\NormalTok{    sigma }\OperatorTok{=}\NormalTok{ np.random.randn()}
+    \ControlFlowTok{return}\NormalTok{ (}\DecValTok{1}\OperatorTok{{-}}\NormalTok{(y}\OperatorTok{/}\DecValTok{10}\NormalTok{))}\OperatorTok{*}\NormalTok{(}\FloatTok{0.1}\OperatorTok{*}\NormalTok{y}\OperatorTok{+}\FloatTok{0.09}\OperatorTok{*}\DecValTok{600}\NormalTok{)}\OperatorTok{+}\NormalTok{sigma}
+
+\KeywordTok{def}\NormalTok{ g(t,y):}
+\NormalTok{    sigma }\OperatorTok{=}\NormalTok{ np.random.randn()}
+    \ControlFlowTok{return}\NormalTok{ (}\DecValTok{1}\OperatorTok{{-}}\NormalTok{(y}\OperatorTok{/}\DecValTok{10}\NormalTok{))}\OperatorTok{*}\NormalTok{(}\FloatTok{0.1}\OperatorTok{*}\NormalTok{y}\OperatorTok{+}\FloatTok{0.1}\OperatorTok{*}\DecValTok{700}\NormalTok{)}\OperatorTok{+}\NormalTok{sigma}
+
+\KeywordTok{def}\NormalTok{ m(t,y):}
+\NormalTok{    sigma }\OperatorTok{=}\NormalTok{ np.random.randn()}
+    \ControlFlowTok{return}\NormalTok{ (}\DecValTok{1}\OperatorTok{{-}}\NormalTok{(y}\OperatorTok{/}\DecValTok{10}\NormalTok{))}\OperatorTok{*}\NormalTok{(}\FloatTok{0.1}\OperatorTok{*}\NormalTok{y}\OperatorTok{+}\FloatTok{0.11}\OperatorTok{*}\DecValTok{800}\NormalTok{)}\OperatorTok{+}\NormalTok{sigma}
+
+\CommentTok{\#\%\%}
+
+\CommentTok{\# a test of Runge{-}Kutta}
+\CommentTok{\# def F(t):}
+\CommentTok{\#     return {-}1.0/3*np.exp({-}3*t)+4.0/3}
+
+\CommentTok{\#\%\%}
+
+\NormalTok{t }\OperatorTok{=}\NormalTok{ np.linspace(}\DecValTok{0}\NormalTok{,}\DecValTok{100}\NormalTok{,}\DecValTok{100}\NormalTok{)}
+\CommentTok{\# yt = F(t)}
+
+\CommentTok{\#\%\%}
+
+\NormalTok{y\_RK2 }\OperatorTok{=}\NormalTok{ ode\_RK2(}\KeywordTok{lambda}\NormalTok{ x,y:f(x,y),}\DecValTok{0}\NormalTok{,}\DecValTok{4}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{100}\NormalTok{)}
+\NormalTok{y\_RK4 }\OperatorTok{=}\NormalTok{ ode\_RK4(}\KeywordTok{lambda}\NormalTok{ x,y:f(x,y),}\DecValTok{0}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{100}\NormalTok{)}
+\NormalTok{y2 }\OperatorTok{=}\NormalTok{ ode\_RK4(}\KeywordTok{lambda}\NormalTok{ x,y:g(x,y),}\DecValTok{0}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{100}\NormalTok{)}
+\NormalTok{y3 }\OperatorTok{=}\NormalTok{ ode\_RK4(}\KeywordTok{lambda}\NormalTok{ x,y:m(x,y),}\DecValTok{0}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{100}\NormalTok{)}
+
+\CommentTok{\#\%\%}
+
+\NormalTok{plt.figure()}
+\NormalTok{plt.plot(t,y\_RK4,}\StringTok{\textquotesingle{}g\textquotesingle{}}\NormalTok{)}
+\NormalTok{plt.plot(t,y2,}\StringTok{\textquotesingle{}b\textquotesingle{}}\NormalTok{)}
+\NormalTok{plt.plot(t,y3,}\StringTok{\textquotesingle{}r\textquotesingle{}}\NormalTok{)}
+\CommentTok{\# plt.plot(t,y\_RK4*1500/10,\textquotesingle{}r\textquotesingle{})}
+\CommentTok{\# plt.plot(t,yt,\textquotesingle{}r\textquotesingle{})}
+\NormalTok{plt.xlabel(}\StringTok{"year"}\NormalTok{)}
+\NormalTok{plt.ylabel(}\StringTok{"weight"}\NormalTok{)}
+\NormalTok{plt.legend([}\StringTok{"bi = 600(first condition)"}\NormalTok{,}\StringTok{"bi = 700(second condition)"}\NormalTok{,}\StringTok{"bi = 800(third condition)"}\NormalTok{])}
+\NormalTok{plt.show()}
+\end{Highlighting}
+\end{Shaded}
+
+
+\end{document}
